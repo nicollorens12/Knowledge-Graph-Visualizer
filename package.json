@@ -1,8 +1,8 @@
 {
-  "name": "agent-context-graph-visualizer",
+  "name": "knowledge-graph-visualizer",
   "displayName": "Agent Context Graph Visualizer",
   "description": "Interactive visualization of markdown-based knowledge graphs with agent-readiness analysis. Right-click a folder to see interconnected markdown files as a force-directed graph with health scores, broken link detection, token budgets, reachability analysis, and more.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "NicoLlorens",
   "license": "MIT",
   "repository": {

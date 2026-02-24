@@ -1,13 +1,13 @@
 # Agent Context Graph Visualizer
 
-[![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/NicoLlorens.agent-context-graph-visualizer)](https://marketplace.visualstudio.com/items?itemName=NicoLlorens.agent-context-graph-visualizer)
+[![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/NicoLlorens.knowledge-graph-visualizer)](https://marketplace.visualstudio.com/items?itemName=NicoLlorens.knowledge-graph-visualizer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A VS Code extension that turns a folder of interconnected markdown files into an interactive force-directed graph — with built-in analysis tools to optimize your documentation for AI agents. Surfaces broken links, orphan documents, health scores, token budgets, and structural issues so your knowledge base delivers maximum context to LLMs.
 
 ## Quick Start
 
-1. Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=NicoLlorens.agent-context-graph-visualizer)
+1. Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=NicoLlorens.knowledge-graph-visualizer)
 2. Right-click any folder in the Explorer sidebar
 3. Select **"Visualize Agent Context Graph"**
 
