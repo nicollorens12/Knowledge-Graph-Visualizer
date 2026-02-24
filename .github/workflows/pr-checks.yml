@@ -1,0 +1,57 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  compile:
+    name: Compile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - run: npm run compile
+
+  version-check:
+    name: Version bump check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get PR version
+        id: pr
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Get main version
+        id: main
+        run: |
+          git show origin/main:package.json > /tmp/main-package.json
+          echo "version=$(node -p "require('/tmp/main-package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Compare versions
+        run: |
+          PR_VERSION="${{ steps.pr.outputs.version }}"
+          MAIN_VERSION="${{ steps.main.outputs.version }}"
+          echo "PR version:   $PR_VERSION"
+          echo "Main version: $MAIN_VERSION"
+
+          node -e "
+            const semver = (v) => v.split('.').map(Number);
+            const [pa, pb, pc] = semver('$PR_VERSION');
+            const [ma, mb, mc] = semver('$MAIN_VERSION');
+            const isGreater = pa > ma || (pa === ma && pb > mb) || (pa === ma && pb === mb && pc > mc);
+            if (!isGreater) {
+              console.error('ERROR: PR version ($PR_VERSION) must be strictly greater than main version ($MAIN_VERSION)');
+              process.exit(1);
+            }
+            console.log('Version check passed: $PR_VERSION > $MAIN_VERSION');
+          "
